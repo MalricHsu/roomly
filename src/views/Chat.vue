@@ -2,8 +2,10 @@
 <template>
   <div class="chat-page">
     <div class="chat-header">
-      <span>房間：{{ roomId }}</span>
-      <span>歡迎，{{ currentUser?.displayName }}</span>
+      <div class="header-info">
+        <span class="room-name">房間：{{ roomId }}</span>
+        <span class="welcome">歡迎，{{ currentUser?.displayName }}</span>
+      </div>
       <div class="header-actions">
         <button class="back-btn" @click="backToRooms">← 選房間</button>
         <button @click="handleLogout">登出</button>
@@ -127,18 +129,35 @@ const handleLogout = async () => {
   border-bottom: var(--border-w) solid var(--ink);
   background-color: var(--accent);
   color: var(--on-accent);
+  flex-wrap: wrap;
 }
 
-.chat-header span:first-child {
+.header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.room-name {
   font-family: var(--font-display);
   font-weight: 900;
   font-size: 1.2rem;
   text-transform: uppercase;
   letter-spacing: -0.02em;
+  word-break: break-all;
 }
 
-.chat-header span {
+.welcome {
   font-weight: 700;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .chat-header button {
@@ -151,6 +170,15 @@ const handleLogout = async () => {
 
 .chat-header button:active {
   background-color: #333;
+}
+
+.chat-header .back-btn {
+  background-color: var(--paper);
+  color: var(--ink);
+}
+
+.chat-header .back-btn:active {
+  background-color: #fff;
 }
 
 .messages {
@@ -221,6 +249,32 @@ const handleLogout = async () => {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 420px) {
+  .chat-header {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .header-actions {
+    gap: 6px;
+  }
+
+  .chat-header button {
+    padding: 7px 10px;
+    font-size: 0.7rem;
+  }
+
+  .room-name {
+    font-size: 1.05rem;
+  }
+
+  .messages,
+  .send-form {
+    padding-left: 14px;
+    padding-right: 14px;
   }
 }
 </style>
