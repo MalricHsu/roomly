@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+
+:root {
+  --paper: #f4f2e9;
+  --ink: #111110;
+  --accent: #b3122a;
+  --accent-press: #8f0d20;
+  --on-accent: #f4f2e9;
+  --alert: #ff8a1e;
+
+  --border-w: 3px;
+  --radius: 4px;
+  --shadow: 6px 6px 0 var(--ink);
+  --shadow-lg: 9px 9px 0 var(--ink);
+
+  --font-display: 'Archivo', 'Noto Sans TC', sans-serif;
+  --font-body: 'Noto Sans TC', 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  line-height: 1.5;
+  background-color: var(--paper);
+  /* faint editorial grid */
+  background-image:
+    linear-gradient(rgba(17, 17, 16, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 17, 16, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+/* ---- shared controls ---- */
+input,
+button {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+input {
+  width: 100%;
+  padding: 14px 16px;
+  color: var(--ink);
+  background-color: #fff;
+  border: var(--border-w) solid var(--ink);
+  border-radius: var(--radius);
+  transition:
+    box-shadow 0.12s ease,
+    transform 0.12s ease;
+}
+
+input::placeholder {
+  color: #8a877c;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: var(--shadow);
+  transform: translate(-2px, -2px);
+}
+
+button {
+  padding: 15px 18px;
+  color: var(--on-accent);
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background-color: var(--accent);
+  border: var(--border-w) solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition:
+    box-shadow 0.1s ease,
+    transform 0.1s ease,
+    background-color 0.1s ease;
+}
+
+button:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translate(-3px, -3px);
+}
+
+button:active {
+  background-color: var(--accent-press);
+  box-shadow: 0 0 0 var(--ink);
+  transform: translate(0, 0);
+}
+
+/* ---- auth pages (Login / Register / ForgotPassword) ---- */
+.auth-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  min-height: 100vh;
+  justify-content: center;
+  animation: slide-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.auth-page h2 {
+  position: relative;
+  margin: 0 0 4px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.8rem, 11vw, 4.2rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+/* highlighter swipe behind the heading */
+.auth-page h2::after {
+  content: '';
+  position: absolute;
+  left: -4px;
+  right: 25%;
+  bottom: 4px;
+  height: 0.32em;
+  background-color: var(--accent);
+  z-index: -1;
+}
+
+.auth-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 28px 24px;
+  background-color: #fff;
+  border: var(--border-w) solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+}
+
+.auth-page .error {
+  margin: 0;
+  padding: 12px 14px;
+  font-weight: 700;
+  color: var(--ink);
+  background-color: var(--alert);
+  border: var(--border-w) solid var(--ink);
+  border-radius: var(--radius);
+}
+
+.auth-page a {
+  align-self: flex-start;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 3px solid var(--accent);
+  transition: background-color 0.15s ease;
+}
+
+.auth-page a:hover {
+  background-color: var(--accent);
+  color: var(--on-accent);
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
