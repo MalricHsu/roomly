@@ -4,7 +4,10 @@
     <div class="chat-header">
       <span>房間：{{ roomId }}</span>
       <span>歡迎，{{ currentUser?.displayName }}</span>
-      <button @click="handleLogout">登出</button>
+      <div class="header-actions">
+        <button class="back-btn" @click="backToRooms">← 選房間</button>
+        <button @click="handleLogout">登出</button>
+      </div>
     </div>
 
     <div class="messages">
@@ -92,6 +95,10 @@ const formatTime = (timestamp) => {
   if (!timestamp) return ''
   const date = timestamp.toDate()
   return date.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' })
+}
+
+const backToRooms = () => {
+  router.push('/room-select')
 }
 
 const handleLogout = async () => {
